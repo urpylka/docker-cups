@@ -81,3 +81,9 @@ docker exec -ti cups /bin/sh
 apk update
 apk add iputils iproute2
 ```
+
+___
+
+© 2021 Artem Smirnov \
+© 2017-2019 Thomas Bendler \
+Licensed under GPL-3.0 License
