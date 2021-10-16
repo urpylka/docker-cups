@@ -52,35 +52,17 @@ docker build --rm --no-cache -t thbe/cups:latest .
 
 ## Additional commands
 
-### Check server status
-
-You can use the standard Docker commands to examine the status of the CUPS instance:
-
 ```bash
+# Check server status
 docker logs --tail 1000 --follow --timestamps cups
-```
 
-### Update Docker image
+# Update Docker image
+docker pull thbe/cups:latest
 
-Simply download the trusted build from the [Docker Hub registry](https://hub.docker.com/r/thbe/cups/):
-
-```bash
-docker pull thbe/cups
-```
-
-### Bash shell inside container
-
-If you need a shell inside the container you can run the following command:
-
-```bash
+# Bash shell inside container
 docker exec -ti cups /bin/sh
-```
 
-### Add network tools
-
-If you need network tools to debug your installation use the following command:
-
-```bash
+# Add network tools
 docker exec -ti cups /bin/sh
 apk update
 apk add iputils iproute2
