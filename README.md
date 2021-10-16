@@ -33,6 +33,10 @@ You can use two environment variables that will be recognized by the start scrip
 2. The username for the print server is `root`/`password` unless you don't change the password with the environment
 variable `CUPS_ENV_PASSWORD`.
 
+After running the container you can find web-interface at port 631.
+
+> Ports 137, 139, 445 are used by Samba protocol; port 5353 is used by zeroconf (avahi-daemon). You can disable it if you want.
+
 Keep in a mind that it use the image from [dockerhub](https://hub.docker.com/r/thbe/cups/). If you want to use own image – build [source code](https://github.com/thbe/docker-cups#build-from-source-code) and tag it.
 
 ## Build from source code
