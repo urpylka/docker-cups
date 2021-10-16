@@ -23,7 +23,11 @@ ENV TERM xterm
 WORKDIR /opt/cups
 
 # Install CUPS/AVAHI
-RUN apk update --no-cache && apk add --no-cache cups cups-filters avahi inotify-tools
+RUN apk update --no-cache && apk add --no-cache \
+    cups \
+    cups-filters \
+    avahi \
+    inotify-tools
 
 # Expose SMB printer sharing
 EXPOSE 137/udp 139/tcp 445/tcp
