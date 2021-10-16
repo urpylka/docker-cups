@@ -1,15 +1,5 @@
 FROM alpine
 
-#
-# BUILD:
-#   wget https://raw.githubusercontent.com/thbe/docker-cups/master/Dockerfile
-#   docker build --rm --no-cache -t thbe/cups .
-#
-# USAGE:
-#   wget https://raw.githubusercontent.com/thbe/docker-cups/master/start_cups.sh
-#   ./start_cups.sh
-#
-
 # Set metadata
 LABEL maintainer="Thomas Bendler <project@bendler-net.de>"
 LABEL version="1.3"
