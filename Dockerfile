@@ -1,4 +1,5 @@
 FROM alpine
+
 #
 # BUILD:
 #   wget https://raw.githubusercontent.com/thbe/docker-cups/master/Dockerfile
@@ -24,12 +25,6 @@ WORKDIR /opt/cups
 # Install CUPS/AVAHI
 RUN apk update --no-cache && apk add --no-cache cups cups-filters avahi inotify-tools
 
-# Copy configuration files
-COPY root /
-
-# Prepare CUPS container
-RUN chmod 755 /srv/run.sh
-
 # Expose SMB printer sharing
 EXPOSE 137/udp 139/tcp 445/tcp
 
@@ -38,6 +33,12 @@ EXPOSE 631/tcp
 
 # Expose avahi advertisement
 EXPOSE 5353/udp
+
+# Copy configuration files
+COPY root /
+
+# Prepare CUPS container
+RUN chmod 755 /srv/run.sh
 
 # Start CUPS instance
 CMD ["/srv/run.sh"]

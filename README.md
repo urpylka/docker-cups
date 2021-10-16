@@ -6,7 +6,7 @@ This is a Docker image to run a CUPS instance with built in Apples zeroconf supp
 
 This Docker image is based on the offical [Alpine](https://hub.docker.com/r/_/alpine/) image.
 
-#### Table of Contents
+## Table of Contents
 
 - [Install Docker](https://github.com/thbe/docker-cups#install-docker)
 - [Download](https://github.com/thbe/docker-cups#download)
@@ -26,7 +26,7 @@ To use this image you have to [install Docker](https://docs.docker.com/engine/in
 
 You can get the trusted build from the [Docker Hub registry](https://hub.docker.com/r/thbe/cups/):
 
-```
+```bash
 docker pull thbe/cups
 ```
 
@@ -52,7 +52,7 @@ If this environment variable is set, the scripts inside the container will run i
 The instance can be started by the [start script](https://raw.githubusercontent.com/thbe/docker-cups/master/start_cups.sh)
 from GitHub:
 
-```
+```bash
 wget https://raw.githubusercontent.com/thbe/docker-cups/master/start_cups.sh
 export CUPS_PASSWORD='SeCre!1'
 chmod 755 start_cups.sh
@@ -63,7 +63,7 @@ chmod 755 start_cups.sh
 
 You can use the standard Docker commands to examine the status of the CUPS instance:
 
-```
+```bash
 docker logs --tail 1000 --follow --timestamps cups
 ```
 
@@ -81,7 +81,7 @@ section.
 
 Simply download the trusted build from the [Docker Hub registry](https://hub.docker.com/r/thbe/cups/):
 
-```
+```bash
 docker pull thbe/cups
 ```
 
@@ -92,7 +92,7 @@ docker pull thbe/cups
 You can build the image also from source. To do this you have to clone the
 [docker-cups](https://github.com/thbe/docker-cups) repository from GitHub:
 
-```
+```bash
 git clone https://github.com/thbe/docker-cups.git
 cd docker-cups
 docker build --rm --no-cache -t thbe/cups .
@@ -102,15 +102,15 @@ docker build --rm --no-cache -t thbe/cups .
 
 If you need a shell inside the container you can run the following command:
 
-```
+```bash
 docker exec -ti cups /bin/sh
 ```
 
-### Add network tools ###
+### Add network tools
 
 If you need network tools to debug your installation use the following command:
 
-```
+```bash
 docker exec -ti cups /bin/sh
 apk update
 apk add iputils iproute2
