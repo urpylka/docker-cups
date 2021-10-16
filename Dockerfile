@@ -31,8 +31,5 @@ EXPOSE 5353/udp
 # Copy configuration files
 COPY root /
 
-# Prepare CUPS container
-RUN chmod 755 /srv/run.sh
-
 # Start CUPS instance
-CMD ["/srv/run.sh"]
+CMD ["/run.sh"]
