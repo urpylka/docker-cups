@@ -1,19 +1,7 @@
 #! /bin/sh
+
 #
 # Set root password and start CUPS instance
-#
-# Author:       Thomas Bendler <project@bendler-net.de>
-# Date:         Sat Dec  8 15:46:29 CET 2018
-#
-# Release:      v1.3
-#
-# Prerequisite: This release needs a shell which could handle functions.
-#               If shell is not able to handle functions, remove the
-#               error section.
-#
-# ChangeLog:    v0.1 - Initial release
-#               v1.2 - First production ready release (align with image version)
-#               v1.3 - Add avahi
 #
 
 ### Enable debug if debug flag is true ###
