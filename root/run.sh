@@ -50,18 +50,14 @@ sed -i 's/.*enable\-reflector=.*/enable\-reflector\=yes/' /etc/avahi/avahi-daemo
 sed -i 's/.*reflect\-ipv=.*/reflect\-ipv\=yes/' /etc/avahi/avahi-daemon.conf
 
 ### Copy CUPS docker env variable to script ###
-if [ -z ${CUPS_ENV_PASSWORD} ]; then
-  CUPS_PASSWORD="password"
-else
-  CUPS_PASSWORD=${CUPS_ENV_PASSWORD}
-fi
+CUPS_PASSWORD=${CUPS_ENV_PASSWORD:-"password"}
 
 ### Main logic to create an admin user for CUPS ###
 if printf '%s' "${CUPS_PASSWORD}" | LC_ALL=C grep -q '[^ -~]\+'; then
   RETURN=1; REASON="CUPS password contain illegal non-ASCII characters, aborting!"; exit;
 fi
 
-### set password for root user ###
+### Set password for root user ###
 echo root:${CUPS_PASSWORD} | /usr/sbin/chpasswd
 if [ ${?} -ne 0 ]; then RETURN=${?}; REASON="Failed to set password ${CUPS_PASSWORD} for user root, aborting!"; exit; fi
 
@@ -84,7 +80,19 @@ EOF
 /sbin/syslogd
 
 ### Start automatic printer refresh for avahi ###
-#/srv/avahi-refresh.sh
+autorefresh() {
+  test -d /etc/cups || return 1
+  /usr/bin/inotifywait -m -e close_write,moved_to,create /etc/cups |
+    while read -r directory events filename; do
+      if [ "$filename" = "printers.conf" ]; then
+        rm -rf /services/AirPrint-*.service
+        /root/airprint-generate.py -d /services
+        cp /etc/cups/printers.conf /config/printers.conf
+        rsync -avh /services/ /etc/avahi/services/
+      fi
+    done
+}
+# autorefresh &
 
 ### Start avahi instance ###
 /usr/sbin/avahi-daemon --daemonize --syslog
